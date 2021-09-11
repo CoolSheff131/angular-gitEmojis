@@ -1,9 +1,11 @@
 .emojiImg{
+    background: white;
     width: 25px;
     height: 25px;
 }
 
 .emojiImg:hover{
+    position: absolute;
     width: auto;
     height: auto;
 }

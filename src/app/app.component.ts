@@ -11,6 +11,7 @@ import { emoji } from './config/interfaces';
 export class AppComponent implements OnInit {
   title = 'angular-gitEmojis'
   emojis :emoji[] = []
+  deletedEmojis: emoji[] = []
   
   constructor(private configService: ConfigService){}
 
@@ -25,4 +26,16 @@ export class AppComponent implements OnInit {
       }
     }) 
   }  
+
+  makeFavorite(emoji: emoji){
+    console.log(emoji.name)
+    emoji.isFavorite = !emoji.isFavorite
+  }
+
+  delete(index: number){
+    let emoji = this.emojis[index]
+    emoji.isDeleted = !emoji.isDeleted
+    this.deletedEmojis.push(emoji)    
+    this.emojis.splice(index, 1);    
+  }
 }
