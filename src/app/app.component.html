@@ -11,10 +11,21 @@
         class="list-group-item-action list-group-item "
         *ngFor="let item of emojis"
         >
+        <div>
+          {{item.name}}
+        </div>
+        
+
+        <div>
+          {{item.url}}
+        </div>
+
+        
         <img  [src]="item.url" alt="" class="emojiImg">
         
         
-        {{item.name}}:{{item.url}}
+        
+        
         
       </div>
       </div>
