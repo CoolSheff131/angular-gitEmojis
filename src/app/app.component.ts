@@ -23,9 +23,6 @@ export class AppComponent implements OnInit {
         let emoji = {name:key,url: val }
         this.emojis?.push(emoji)
       }
-
-      console.log(data);
-      
     }) 
   }  
 }

@@ -6,16 +6,17 @@
     </div>
     <div class="col-9">
 
-      <div class="list-group">
-        
-        <button
-          type="button" 
-          class="list-group-item list-group-item-action"
-          *ngFor="let item of emojis"
+      <div class="list-group ">
+        <div
+        class="list-group-item-action list-group-item "
+        *ngFor="let item of emojis"
         >
-        {{item.name}}:{{item.url}}
-        </button>
+        <img  [src]="item.url" alt="" class="emojiImg">
         
+        
+        {{item.name}}:{{item.url}}
+        
+      </div>
       </div>
 
     </div>
