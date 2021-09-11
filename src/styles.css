@@ -2,3 +2,7 @@
 body {
     overflow: hidden;
 }
+
+.sr-only{
+    display: none;
+}
