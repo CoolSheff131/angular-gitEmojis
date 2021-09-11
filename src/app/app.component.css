@@ -7,3 +7,15 @@
     width: auto;
     height: auto;
 }
+
+.icon:hover :first-child{
+    display: none;
+}
+
+.icon:hover :last-child{
+    display: block;
+}
+
+.hoverIcon{
+    display: none;
+}
