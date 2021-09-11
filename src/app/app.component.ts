@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from './config/config.service';
+import { emoji } from './config/interfaces';
 
 
 @Component({
@@ -9,14 +10,22 @@ import { ConfigService } from './config/config.service';
 })
 export class AppComponent implements OnInit {
   title = 'angular-gitEmojis'
-  emojis :any[] | undefined
+  emojis :emoji[] = []
   
   constructor(private configService: ConfigService){}
 
   ngOnInit(): void {
     this.configService.getConfig().subscribe((data)=>{
+      for (const [key, value] of Object.entries(data)) {
+        let val = typeof value === 'string'
+        ? value
+        : undefined
+        let emoji = {name:key,url: val }
+        this.emojis?.push(emoji)
+      }
+
       console.log(data);
-      this.emojis = data
+      
     }) 
   }  
 }
