@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ConfigService } from './config/config.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EmojiTableComponent } from './emoji-table/emoji-table.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { EmojiTableComponent } from './emoji-table/emoji-table.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     ConfigService

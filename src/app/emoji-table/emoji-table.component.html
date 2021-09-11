@@ -26,7 +26,8 @@
       </div>
     </div>
     <div class="overflow-auto">
-      <div class="list-group-item-action list-group-item" *ngFor="let item of emojis; index as i">
+        <div *ngFor="let item of emojis; index as i">
+      <div class="list-group-item-action list-group-item"  *ngIf="!item.isDeleted">
         <div class="row">
           <div class="col-3">{{item.name}}</div>
           <div class="col-6">{{item.url}}</div>
@@ -53,5 +54,7 @@
           </div>
         </div>
       </div>
+    </div>
+    
     </div>
   </div>

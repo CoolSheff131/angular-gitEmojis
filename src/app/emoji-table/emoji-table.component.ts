@@ -8,6 +8,8 @@ import { emoji } from '../config/interfaces';
   styleUrls: ['./emoji-table.component.css']
 })
 export class EmojiTableComponent implements OnInit {
+  allEmojis : emoji[] = []
+  favoriteEmojis: emoji[] = []
   emojis :emoji[] = []
   deletedEmojis: emoji[] = []
   constructor(private configService: ConfigService) { }
@@ -24,17 +26,24 @@ export class EmojiTableComponent implements OnInit {
     }) 
   }
 
+  showFavorite(){
+
+  }
+
+  showDeleted(){
+
+  }
   
   makeFavorite(emoji: emoji){
-    console.log(emoji.name)
     emoji.isFavorite = !emoji.isFavorite
+    this.favoriteEmojis.push(emoji)
   }
 
   delete(index: number){
     let emoji = this.emojis[index]
     emoji.isDeleted = !emoji.isDeleted
     this.deletedEmojis.push(emoji)    
-    this.emojis.splice(index, 1);    
+    //this.emojis.splice(index, 1);    
   }
 
 }
