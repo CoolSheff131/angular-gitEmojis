@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  categories=[
+    "all",
+    "favorite",
+    "deleted"
+  ]
   constructor() { }
 
   ngOnInit(): void {
