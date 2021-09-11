@@ -1,0 +1,30 @@
+.emojiImg{
+    background: white;
+    width: 25px;
+    height: 25px;
+}
+
+.emojiImg:hover{
+    position: absolute;
+    width: auto;
+    height: auto;
+}
+
+.icon:hover :first-child{
+    position: absolute;
+    display: none;
+}
+
+.icon:hover :last-child{
+    position: absolute;
+    display: block;
+}
+
+
+.emojiTable{
+    max-height: 100vh;
+}
+
+.row{
+    height: 50px;
+}

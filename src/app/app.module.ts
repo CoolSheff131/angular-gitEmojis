@@ -5,11 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ConfigService } from './config/config.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { EmojiTableComponent } from './emoji-table/emoji-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent
+    SidebarComponent,
+    EmojiTableComponent
   ],
   imports: [
     BrowserModule,

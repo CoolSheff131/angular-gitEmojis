@@ -16,4 +16,8 @@ export class SidebarComponent implements OnInit {
     this.categories.push({name:"любимые",active:false})
     this.categories.push({name:"удаленные",active:false})
   }
+
+  showCategory(category:category){
+    
+  }
 }
