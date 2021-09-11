@@ -8,21 +8,15 @@ import { ConfigService } from './config/config.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'angular-gitEmojis';
-
+  title = 'angular-gitEmojis'
+  emojis :any[] | undefined
+  
   constructor(private configService: ConfigService){}
 
   ngOnInit(): void {
-    console.log("started");
-    
-    this.configService.getConfig().subscribe( resp =>{
-      console.log(resp)
-    })  
-
-    console.log("ended");
-    
-  }
-
-
-  
+    this.configService.getConfig().subscribe((data)=>{
+      console.log(data);
+      this.emojis = data
+    }) 
+  }  
 }
