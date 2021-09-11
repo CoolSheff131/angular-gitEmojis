@@ -1,24 +1,13 @@
-
-<div class="col-3 sidebar">
-      
-      
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar" style="width: 280px;">
-      
-      <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item"
-        *ngFor="let category of categories"
-      >
-        <a href="#" class="nav-link text-white" aria-current="page">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-          {{category}}
-        </a>
-      </li>
-      
-    </ul>
-    <hr>
-      
+<div class="sidebar">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar" style="width: 200px;">
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item " *ngFor="let category of categories" >
+                <a class="nav-link text-white" aria-current="page" [class.active]="category.active"> 
+                    {{category.name}}
+                </a>
+            </li>
+        </ul>
+        <hr>
     </div>
-
-
-  </div>
+</div>

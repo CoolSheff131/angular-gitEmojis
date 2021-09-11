@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { category } from '../config/interfaces';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,14 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  categories=[
-    "all",
-    "favorite",
-    "deleted"
-  ]
+  categories:category[] = []
   constructor() { }
 
   ngOnInit(): void {
+    this.categories.push({name:"все",active:true})
+    this.categories.push({name:"любимые",active:false})
+    this.categories.push({name:"удаленные",active:false})
   }
-
 }

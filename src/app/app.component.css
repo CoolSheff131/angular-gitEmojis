@@ -11,13 +11,20 @@
 }
 
 .icon:hover :first-child{
+    position: absolute;
     display: none;
 }
 
 .icon:hover :last-child{
+    position: absolute;
     display: block;
 }
 
-.hoverIcon{
-    display: none;
+
+.emojiTable{
+    max-height: 100vh;
+}
+
+.row{
+    height: 50px;
 }

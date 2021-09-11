@@ -4,3 +4,8 @@ export interface emoji{
     isFavorite?: boolean
     isDeleted?: boolean
 }
+
+export interface category{
+    name: string
+    active: boolean
+}
