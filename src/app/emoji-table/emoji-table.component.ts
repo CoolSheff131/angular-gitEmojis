@@ -13,7 +13,7 @@ export class EmojiTableComponent implements OnInit {
 
   public page: number
   public collectionSize: number
-  public itemsPerPage: number = 10;
+  public itemsPerPage: number = 7;
 
   allEmojis : emoji[] = []
   favoriteEmojis: emoji[] = []
@@ -36,17 +36,31 @@ export class EmojiTableComponent implements OnInit {
     }) 
   }
 
-  showFavorite(){
-
+  showEmojis(i: number){
+    console.log(this.emojis);
+    
+    console.log(i)
+    if(i === 0){
+      console.log("all")
+      this.emojis = this.allEmojis
+    }else if(i === 1){
+      console.log("fav")
+      this.emojis = this.favoriteEmojis
+    }else if(i === 2){
+      console.log("deleted")
+      this.emojis = this.deletedEmojis
+    }
+    console.log(this.emojis);
+    
   }
 
-  showDeleted(){
-
-  }
+  
   
   makeFavorite(emoji: emoji){
     emoji.isFavorite = !emoji.isFavorite
     this.favoriteEmojis.push(emoji)
+    console.log("favorite become");
+    
   }
 
   delete(index: number){
