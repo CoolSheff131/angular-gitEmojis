@@ -11,8 +11,6 @@ import { EmojiTableComponent } from '../emoji-table/emoji-table.component';
 export class SidebarComponent implements OnInit {
 
   @Input() categories:category[] = []
-
-  currentCategory: number = 0
   @Output() newItemEvent = new EventEmitter<number>();
   constructor() { }
 
@@ -22,11 +20,5 @@ export class SidebarComponent implements OnInit {
 
   showCategory(index:number){
     this.newItemEvent.emit(index)
-    // console.log(this.emojiTable.emojis);
-
-    // this.categories[this.currentCategory].active = false
-    // this.currentCategory = index
-    // this.categories[index].active = true
-    // this.emojiTable.showEmojis(index)
   }
 }

@@ -10,6 +10,10 @@
                     [itemsPerPage]="itemsPerPage"
                     [collectionSize]="collectionSize"
                     [emojis]="emojis"
-                    (newItemEvent)="loadPage($event)"></app-emoji-table>
+                    (newItemEvent)="loadPage($event)"
+                    (favItemEvent)="fav($event)"
+                    (delItemEvent)="del($event)"
+                    
+                    ></app-emoji-table>
   </div>
 </div>

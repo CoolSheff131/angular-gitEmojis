@@ -14,12 +14,11 @@ export class EmojiTableComponent implements OnInit {
   public page: number
   @Input() collectionSize: number
   @Input() itemsPerPage: number = 7;
-
-
-  
   @Output() newItemEvent = new EventEmitter<number>();
+  @Output() delItemEvent = new EventEmitter<number>();
+  @Output() favItemEvent = new EventEmitter<emoji>();
   @Input() emojis :emoji[] = []
-
+  
   constructor() { 
     this.page= 1
     this.collectionSize=1
@@ -30,9 +29,11 @@ export class EmojiTableComponent implements OnInit {
   }
 
   private loadPage(){
-    this.newItemEvent.emit(this.page)
+    this.newItemEvent.emit(this.page)   
+  }
 
-    
+  onPageChanged(pageNumber: number){
+    this.loadPage()
   }
 
   showEmojis(i: number){
@@ -40,15 +41,13 @@ export class EmojiTableComponent implements OnInit {
   }
 
   
-  
   makeFavorite(emoji: emoji){
+    this.favItemEvent.emit(emoji)   
   }
 
   delete(index: number){
+    this.delItemEvent.emit(index)   
   }
 
-  onPageChanged(pageNumber: number){
-    this.loadPage()
-  }
 
 }

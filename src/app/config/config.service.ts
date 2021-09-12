@@ -13,12 +13,12 @@ export class ConfigService {
 
     configUrl = 'https://api.github.com/emojis ';
 
-    getConfig(page:number, itemsPerPage:number): Observable<Page> {
+    getConfig(): Observable<Array<any>> {
         var emojis = this.http.get<any>(this.configUrl)
-        return this.getPageItems(emojis, page, itemsPerPage)
+        return this.getPageItems(emojis)
     }
 
-    private getPageItems(emojis:Observable<any>,page:number, itemsPerPage:number): Observable<Page> {
+    private getPageItems(emojis:Observable<any>): Observable<Array<any>> {
       return emojis.pipe(
         map(e => {
           let arr = []
@@ -29,10 +29,7 @@ export class ConfigService {
             let emoji = {name:key,url: val }
             arr.push(emoji)
           }
-
-          console.log(arr)
-          var startIndex = itemsPerPage * (page - 1)
-          return new Page(arr.length,arr.slice(startIndex, startIndex + itemsPerPage))
+          return arr        
         })
       )
     }
