@@ -2,7 +2,7 @@
   <div class="col-2">
     <app-sidebar [categories]="categories"
                   
-                  (newItemEvent)="addItem($event)"></app-sidebar>
+                  (itemSelectedEvent)="showCategory($event)"></app-sidebar>
   </div>
 
   <div class="col-8">

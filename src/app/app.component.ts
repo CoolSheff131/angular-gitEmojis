@@ -37,7 +37,7 @@ export class AppComponent implements OnInit{
     }) 
   }
 
-  addItem(index: number) { 
+  showCategory(index: number) { 
     this.categories[this.currentCategory].active = false
     this.currentCategory = index
     this.categories[index].active = true
@@ -66,8 +66,6 @@ export class AppComponent implements OnInit{
     this.collectionSize = page!.totalCount     
   }
   fav(emoji: emoji){
-    console.log("aaaaaaaaaaaa");
-    
     this.favemojis.push(emoji)
   }
   del(index: number){

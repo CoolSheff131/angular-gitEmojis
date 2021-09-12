@@ -11,7 +11,7 @@ import { EmojiTableComponent } from '../emoji-table/emoji-table.component';
 export class SidebarComponent implements OnInit {
 
   @Input() categories:category[] = []
-  @Output() newItemEvent = new EventEmitter<number>();
+  @Output() itemSelectedEvent = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit(): void {
@@ -19,6 +19,6 @@ export class SidebarComponent implements OnInit {
   }
 
   showCategory(index:number){
-    this.newItemEvent.emit(index)
+    this.itemSelectedEvent.emit(index)
   }
 }
