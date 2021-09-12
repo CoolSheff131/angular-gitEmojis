@@ -22,11 +22,8 @@ export class ConfigService {
       return emojis.pipe(
         map(e => {
           let arr = []
-          for (const [key, value] of Object.entries(e)) {
-            let val = typeof value === 'string'
-            ? value
-            : undefined
-            let emoji = {name:key,url: val }
+          for (const [key, value] of Object.entries(e)) {            
+            let emoji = {name:key,url: value }
             arr.push(emoji)
           }
           return arr        

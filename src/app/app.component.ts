@@ -31,17 +31,13 @@ export class AppComponent implements OnInit{
     if(jsonArr){
       this.delemojis = JSON.parse(jsonArr);
       console.log("del loaded");
-      
     }else console.log("not loaded");
-    
     jsonArr = localStorage.getItem("favorite")
     if(jsonArr){
       this.favemojis = JSON.parse(jsonArr)
-      console.log("fav loaded");
-      
-    }
-
-    
+      console.log("fav loaded"); 
+    }  
+    this.checkEmojis()
   }
 
   saveLists(){
@@ -58,8 +54,16 @@ export class AppComponent implements OnInit{
     this.configService.getConfig().subscribe((arr)=>{
       this.allemojis = arr
       this.showCategory(0)
+      this.loadLists()  
     })
-    this.loadLists()
+    localStorage.clear()
+  }
+
+  checkEmojis(){
+    this.allemojis.forEach(emoji => {
+      emoji.isDeleted  = this.delemojis.includes(emoji)
+      emoji.isFavorite = this.favemojis.includes(emoji)
+    })
   }
 
   showCategory(index: number) { 
@@ -70,40 +74,36 @@ export class AppComponent implements OnInit{
     this.loadPage(1)
   }
 
-  sliceArr(arr : emoji[],page: number):Page{
+  sliceArr(arr: emoji[],page: number):Page{
     var startIndex = this.itemsPerPage * (page - 1)
-    return new Page(arr.length,arr.slice(startIndex, startIndex + this.itemsPerPage))
-    
+    return new Page(arr.length,arr.slice(startIndex, startIndex + this.itemsPerPage))    
   }
 
   loadPage(pageNumber:number){
     let page : Page
-    if(this.currentCategory===0){
-      //загрузить все
-      page = this.sliceArr(this.allemojis,pageNumber)
-    }else if(this.currentCategory === 1){
-      //загрузить любимые
-      page = this.sliceArr(this.favemojis,pageNumber)
-    }else if(this.currentCategory === 2){
-      //загрузить удаленные
-      page = this.sliceArr(this.delemojis,pageNumber)
+    if(this.currentCategory === 0){       //загрузить все      
+      page = this.sliceArr(this.allemojis, pageNumber)
+    }else if(this.currentCategory === 1){//загрузить любимые      
+      page = this.sliceArr(this.favemojis, pageNumber)
+    }else if(this.currentCategory === 2){//загрузить удаленные      
+      page = this.sliceArr(this.delemojis, pageNumber)
     }
     this.emojis = page!.rows
     this.collectionSize = page!.totalCount     
   }
+
   fav(emoji: emoji){
     emoji.isFavorite = !emoji.isFavorite
     this.favemojis.push(emoji)
   }
-  del(emoji: emoji){
 
+  del(emoji: emoji){
     let index = this.allemojis.indexOf(emoji)
     if(index !== 1){
       emoji.isDeleted = !emoji.isDeleted
       this.allemojis.splice(index,1)
       this.delemojis.push(emoji)
-    }
-    
+    } 
   }
   title = 'angular-gitEmojis'
   

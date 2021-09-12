@@ -10,7 +10,7 @@ import { emoji } from '../config/interfaces';
   styleUrls: ['./emoji-table.component.css']
 })
 export class EmojiTableComponent implements OnInit {
-
+  asdf = true
   public page: number
   @Input() collectionSize: number
   @Input() itemsPerPage: number = 7;
