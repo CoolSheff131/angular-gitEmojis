@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { category } from './config/interfaces';
+import { ConfigService } from './config/config.service';
+import { category, emoji } from './config/interfaces';
 import { EmojiTableComponent } from './emoji-table/emoji-table.component';
 
 @Component({
@@ -15,22 +16,26 @@ export class AppComponent implements OnInit{
     {name:"удаленные",active:false}
   ]
 
+  emojis:emoji[] =[]
+  itemsPerPage:number = 3
   @ViewChild(EmojiTableComponent)  emojiTable!: EmojiTableComponent
-  
+  public collectionSize: number
 
 
-  constructor(){
-    
+  constructor(private configService: ConfigService){
+    this.collectionSize=1
   }
+
   ngOnInit(): void {
-    console.log(
-    "from app"+
-    this.emojiTable.emojis
-    );
   }
 
-  addItem(newItem: number) {
-    
+  addItem(newItem: number) { 
+  }
+  loadPage(pageNumber:number){
+    this.configService.getConfig(pageNumber, this.itemsPerPage).subscribe((page)=>{
+      this.emojis = page.rows
+      this.collectionSize = page.totalCount     
+    }) 
   }
 
   title = 'angular-gitEmojis'

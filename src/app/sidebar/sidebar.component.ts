@@ -11,7 +11,7 @@ import { EmojiTableComponent } from '../emoji-table/emoji-table.component';
 export class SidebarComponent implements OnInit {
 
   @Input() categories:category[] = []
-  @Input() emojiTable!: EmojiTableComponent
+
   currentCategory: number = 0
   @Output() newItemEvent = new EventEmitter<number>();
   constructor() { }
