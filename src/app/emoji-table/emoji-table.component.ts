@@ -18,7 +18,7 @@ export class EmojiTableComponent implements OnInit {
   @Output() delItemEvent = new EventEmitter<number>();
   @Output() favItemEvent = new EventEmitter<emoji>();
   @Input() emojis :emoji[] = []
-  
+  @Input() header: string = ""
   constructor() { 
     this.page= 1
     this.collectionSize=1

@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
     {name:"любимые",active:false},
     {name:"удаленные",active:false}
   ]
+  headerTable:string = ""
   currentCategory: number = 0
   emojis:emoji[] =[]
   allemojis:emoji[] =[]
@@ -33,7 +34,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.configService.getConfig().subscribe((arr)=>{
       this.allemojis = arr
-      this.loadPage(1)
+      this.showCategory(0)
     }) 
   }
 
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit{
     this.categories[this.currentCategory].active = false
     this.currentCategory = index
     this.categories[index].active = true
+    this.headerTable = this.categories[index].name
     this.loadPage(1)
   }
 
