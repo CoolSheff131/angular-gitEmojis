@@ -28,7 +28,7 @@
     <div class="overflow-auto">
         <div *ngFor="let item of emojis; index as i">
             
-            <div class="list-group-item-action list-group-item" *ngIf="!item.isDeleted || header === 'удаленные'" >
+            <div class="list-group-item-action list-group-item" *ngIf="!item.isDeleted || (header === 'удаленные' && item.isDeleted)" >
                 <div class="row">
                     <div class="col-3">{{item.name}}</div>
                     <div class="col-6">{{item.url}}</div>
