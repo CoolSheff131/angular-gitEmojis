@@ -68,10 +68,15 @@ export class AppComponent implements OnInit{
     this.collectionSize = page!.totalCount     
   }
   fav(emoji: emoji){
+    emoji.isFavorite = !emoji.isFavorite
     this.favemojis.push(emoji)
   }
   del(index: number){
-    this.delemojis.push(this.emojis[index])
+    
+    let emoji = this.allemojis[index]
+    emoji.isDeleted = !emoji.isDeleted
+    this.allemojis.splice(index,1)
+    this.delemojis.push(emoji)
   }
   title = 'angular-gitEmojis'
   
