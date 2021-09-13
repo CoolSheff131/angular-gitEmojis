@@ -18,11 +18,17 @@ export class EmojiTableComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<number>();
   @Output() delItemEvent = new EventEmitter<emoji>();
   @Output() favItemEvent = new EventEmitter<emoji>();
+  @Output() searchItemEvent = new EventEmitter<string>();
   @Input() emojis :emoji[] = []
   @Input() header: string = ""
   constructor() { 
     this.page= 1
     this.collectionSize=1
+  }
+
+  search(searchName: string){
+    console.log(searchName);
+    this.searchItemEvent.emit(searchName)
   }
 
   ngOnInit(): void {

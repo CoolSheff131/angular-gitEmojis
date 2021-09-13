@@ -5,7 +5,14 @@
                 <h1>{{header}}</h1>
             </div>
             <div class="col-4">
-                <input class="form-control form-control " type="text" placeholder="искать...">
+                <div class="row">
+                    <div class="col-8">
+                        <input  class="col-1 form-control form-control " type="text" placeholder="искать..." #searchName>
+                    </div>
+                    <div class="col-2">
+                        <button class="col-2 btn btn-primary" type="button" (click)="search(searchName.value)">Поиск</button>
+                    </div>
+                </div>                
             </div>
         </div>
     </div>

@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   allemojis: emoji[] = []
   favemojis: emoji[] = []
   delemojis: emoji[] = []
+  filteredEmojis: emoji[] = []
   itemsPerPage: number = 7
   loading: boolean = true
   @ViewChild(EmojiTableComponent) emojiTable!: EmojiTableComponent
@@ -49,7 +50,13 @@ export class AppComponent implements OnInit {
   constructor(private configService: ConfigService) {
     this.collectionSize = 1
   }
-
+  
+  searchItem(searchName: string){
+    this.filteredEmojis = this.allemojis.filter(emoji => emoji.name.indexOf(searchName) !== -1)
+    let page = this.sliceArr(this.filteredEmojis,1)
+    this.emojis = page!.rows
+    this.collectionSize = page!.totalCount
+  }
 
   ngOnInit(): void {
 
@@ -85,13 +92,19 @@ export class AppComponent implements OnInit {
 
   loadPage(pageNumber: number) {
     let page: Page
-    if (this.currentCategory === 0) {       //загрузить все      
-      page = this.sliceArr(this.allemojis, pageNumber)
-    } else if (this.currentCategory === 1) {//загрузить любимые      
-      page = this.sliceArr(this.favemojis, pageNumber)
-    } else if (this.currentCategory === 2) {//загрузить удаленные      
-      page = this.sliceArr(this.delemojis, pageNumber)
+
+    if(this.filteredEmojis.length !== 0){
+      page = this.sliceArr(this.filteredEmojis, pageNumber)
+    }else {
+      if (this.currentCategory === 0) {       //загрузить все      
+        page = this.sliceArr(this.allemojis, pageNumber)
+      } else if (this.currentCategory === 1) {//загрузить любимые      
+        page = this.sliceArr(this.favemojis, pageNumber)
+      } else if (this.currentCategory === 2) {//загрузить удаленные      
+        page = this.sliceArr(this.delemojis, pageNumber)
+      }
     }
+
     this.emojis = page!.rows
     this.collectionSize = page!.totalCount
   }
