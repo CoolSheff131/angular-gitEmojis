@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     { name: "удаленные", active: false }
   ]
   headerTable: string = ""
-  
+
   currentCategory: number = 0
   emojis: emoji[] = []
   allemojis: emoji[] = []
@@ -52,10 +52,10 @@ export class AppComponent implements OnInit {
   constructor(private configService: ConfigService) {
     this.collectionSize = 1
   }
-  
-  searchItem(searchName: string){
+
+  searchItem(searchName: string) {
     this.filteredEmojis = this.allemojis.filter(emoji => emoji.name.indexOf(searchName) !== -1)
-    let page = this.sliceArr(this.filteredEmojis,1)
+    let page = this.sliceArr(this.filteredEmojis, 1)
     this.emojis = page!.rows
     this.collectionSize = page!.totalCount
   }
@@ -92,22 +92,22 @@ export class AppComponent implements OnInit {
     return new Page(arr.length, arr.slice(startIndex, startIndex + this.itemsPerPage))
   }
 
-  loadPage(pageNumber: number) {    
+  loadPage(pageNumber: number) {
     this.pageNumber = pageNumber
     let page: Page
 
-    if(this.filteredEmojis.length !== 0){
+    if (this.filteredEmojis.length !== 0) {
       page = this.sliceArr(this.filteredEmojis, pageNumber)
       let intersection: emoji[] = []
       if (this.currentCategory === 0) {       //загрузить все      
-        intersection = this.filteredEmojis.filter(x => this.allemojis.includes(x));       
-      }else if (this.currentCategory === 1) {//загрузить любимые      
+        intersection = this.filteredEmojis.filter(x => this.allemojis.includes(x));
+      } else if (this.currentCategory === 1) {//загрузить любимые      
         intersection = this.filteredEmojis.filter(x => this.favemojis.includes(x));
       } else if (this.currentCategory === 2) {//загрузить удаленные      
         intersection = this.filteredEmojis.filter(x => this.delemojis.includes(x));
       }
       page = this.sliceArr(intersection, pageNumber)
-    }else {
+    } else {
       if (this.currentCategory === 0) {       //загрузить все      
         page = this.sliceArr(this.allemojis, pageNumber)
       } else if (this.currentCategory === 1) {//загрузить любимые      
@@ -122,13 +122,7 @@ export class AppComponent implements OnInit {
   }
 
   fav(emoji: emoji) {
-    if (emoji.isFavorite) {
-      let index = this.favemojis.indexOf(emoji)
-      if(index !== -1){
-        emoji.isFavorite = false
-        this.favemojis.splice(index, 1)
-      }
-    } else {
+    if (!emoji.isFavorite) {
       let index = this.allemojis.indexOf(emoji)
       if (index !== -1) {
         emoji.isFavorite = true
@@ -138,22 +132,30 @@ export class AppComponent implements OnInit {
     this.loadPage(this.pageNumber)
   }
 
-  del(emoji: emoji) {    
-    if (emoji.isDeleted) {    
-      let index = this.delemojis.indexOf(emoji)
-      if(index !== -1){        
-        emoji.isDeleted = false
-        this.delemojis.splice(index, 1)
-        this.allemojis.push(emoji)
+  del(emoji: emoji) {
+    if (emoji.isFavorite) {
+      let index = this.favemojis.indexOf(emoji)
+      if (index !== -1) {
+        emoji.isFavorite = false
+        this.favemojis.splice(index, 1)
       }
-    } else {      
-      let index = this.allemojis.indexOf(emoji)
-      if (index !== -1) {        
-        emoji.isDeleted = true
-        this.allemojis.splice(index, 1)
-        this.delemojis.push(emoji)
+    } else {
+      if (emoji.isDeleted) {
+        let index = this.delemojis.indexOf(emoji)
+        if (index !== -1) {
+          emoji.isDeleted = false
+          this.delemojis.splice(index, 1)
+          this.allemojis.push(emoji)
+        }
+      } else {
+        let index = this.allemojis.indexOf(emoji)
+        if (index !== -1) {
+          emoji.isDeleted = true
+          this.allemojis.splice(index, 1)
+          this.delemojis.push(emoji)
+        }
       }
-    }    
+    }
     this.loadPage(this.pageNumber)
   }
   title = 'angular-gitEmojis'
