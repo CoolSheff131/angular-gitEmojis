@@ -3,7 +3,7 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item " *ngFor="let category of categories; index as i " (click)="showCategory(i)">
-                <a class="nav-link text-white" aria-current="page" [class.active]="category.active"> 
+                <a class="nav-link text-white" aria-current="page" [class.active]="category.active">
                     {{category.name}}
                 </a>
             </li>

@@ -1,19 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConfigService } from '../config/config.service';
 import { emoji } from '../config/interfaces';
-
-
 
 @Component({
   selector: 'app-emoji-table',
   templateUrl: './emoji-table.component.html',
   styleUrls: ['./emoji-table.component.css']
 })
-export class EmojiTableComponent implements OnInit {
+export class EmojiTableComponent {
   asdf = true
-  public pageNumber: number
+  public pageNumber: number = 1
   @Input() loading: boolean = false
-  @Input() collectionSize: number
+  @Input() collectionSize: number = 1
   @Input() itemsPerPage: number = 7;
   @Output() newItemEvent = new EventEmitter<number>();
   @Output() delItemEvent = new EventEmitter<emoji>();
@@ -21,17 +18,12 @@ export class EmojiTableComponent implements OnInit {
   @Output() searchItemEvent = new EventEmitter<string>();
   @Input() emojis: emoji[] = []
   @Input() header: string = ""
-  constructor() {
-    this.pageNumber = 1
-    this.collectionSize = 1
-  }
+
+  constructor() { }
 
   search(searchName: string) {
     console.log(searchName);
     this.searchItemEvent.emit(searchName)
-  }
-
-  ngOnInit(): void {
   }
 
   private loadPage() {

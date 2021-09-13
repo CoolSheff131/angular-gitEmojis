@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfigService } from './config/config.service';
 import { category, emoji } from './config/interfaces';
 import { EmojiTableComponent } from './emoji-table/emoji-table.component';
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
   }
 
   saveLists() {
-    
+
     localStorage.setItem("deleted", JSON.stringify(this.delemojis))
     localStorage.setItem("favorite", JSON.stringify(this.favemojis))
   }
@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
       this.filteredEmojis = this.favemojis.filter(emoji => emoji.name.indexOf(searchName) !== -1)
     } else if (this.currentCategory === 2) {//загрузить удаленные      
       this.filteredEmojis = this.delemojis.filter(emoji => emoji.name.indexOf(searchName) !== -1)
-    }    
+    }
     let page = this.sliceArr(this.filteredEmojis, 1)
     this.emojis = page!.rows
     this.collectionSize = page!.totalCount
@@ -78,39 +78,39 @@ export class AppComponent implements OnInit {
       this.loading = false
     })
     this.loading = true
-    
+
   }
 
   checkEmojis() {
-    this.allemojis.forEach((emoji,indexAll,arrAll) => {
+    this.allemojis.forEach((emoji, indexAll, arrAll) => {
       this.favemojis.forEach((favemoji, index, arr) => {
-        if(emoji.name === favemoji.name){
+        if (emoji.name === favemoji.name) {
           emoji.isFavorite = true
           arr[index] = emoji
         }
       })
       this.delemojis.forEach((delemoji, index, arr) => {
-        if(delemoji.name === emoji.name){
-          arrAll.splice(indexAll,1)
+        if (delemoji.name === emoji.name) {
+          arrAll.splice(indexAll, 1)
           emoji.isDeleted = true
           arr[index] = emoji
-        }      
-      })          
+        }
+      })
     })
   }
 
   showCategory(index: number) {
-    console.log("emojisFiltered"+this.filteredEmojis.length);
-     
+    console.log("emojisFiltered" + this.filteredEmojis.length);
+
     this.categories[this.currentCategory].active = false
     this.currentCategory = index
     this.categories[index].active = true
     this.headerTable = this.categories[index].name
-    
-    if(this.searchName.length !== 0) {
+
+    if (this.searchName.length !== 0) {
       this.searchItem(this.searchName)
-      console.log("entered");      
-    }else{
+      console.log("entered");
+    } else {
       this.filteredEmojis = []
     }
     this.loadPage(1)
@@ -157,7 +157,7 @@ export class AppComponent implements OnInit {
         emoji.isFavorite = true
         this.favemojis.push(emoji)
       }
-    }else{
+    } else {
       let index = this.favemojis.indexOf(emoji)
       if (index !== -1) {
         emoji.isFavorite = false
@@ -185,16 +185,16 @@ export class AppComponent implements OnInit {
       } else {
         let index = this.allemojis.indexOf(emoji)
         if (index !== -1) {
-          emoji.isDeleted = true          
+          emoji.isDeleted = true
           this.allemojis.splice(index, 1)
-          if(!this.delemojis.includes(emoji))
+          if (!this.delemojis.includes(emoji))
             this.delemojis.push(emoji)
 
           index = this.favemojis.indexOf(emoji)
-      if (index !== -1) {
-        emoji.isFavorite = false
-        this.favemojis.splice(index, 1)
-      }
+          if (index !== -1) {
+            emoji.isFavorite = false
+            this.favemojis.splice(index, 1)
+          }
         }
       }
     }

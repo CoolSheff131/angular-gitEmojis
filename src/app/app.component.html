@@ -1,22 +1,11 @@
 <div class="row" (window:beforeunload)="saveLists()">
   <div class="col-2">
-    <app-sidebar [categories]="categories"
-                  
-                  (itemSelectedEvent)="showCategory($event)"></app-sidebar>
+    <app-sidebar [categories]="categories" (itemSelectedEvent)="showCategory($event)"></app-sidebar>
   </div>
 
   <div class="col-9">
-    <app-emoji-table
-                    
-                    [header]="headerTable"
-                    [itemsPerPage]="itemsPerPage"
-                    [collectionSize]="collectionSize"
-                    [emojis]="emojis"
-                    [loading]="loading"
-                    (newItemEvent)="loadPage($event)"
-                    (favItemEvent)="fav($event)"
-                    (delItemEvent)="del($event)"
-                    (searchItemEvent)="searchItem($event)"
-                    ></app-emoji-table>
+    <app-emoji-table [header]="headerTable" [itemsPerPage]="itemsPerPage" [collectionSize]="collectionSize"
+      [emojis]="emojis" [loading]="loading" (newItemEvent)="loadPage($event)" (favItemEvent)="fav($event)"
+      (delItemEvent)="del($event)" (searchItemEvent)="searchItem($event)"></app-emoji-table>
   </div>
 </div>
