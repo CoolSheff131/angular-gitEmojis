@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   filteredEmojis: emoji[] = []
   itemsPerPage: number = 7
   loading: boolean = true
+  pageNumber: number = 1
   @ViewChild(EmojiTableComponent) emojiTable!: EmojiTableComponent
   public collectionSize: number
 
@@ -91,10 +92,8 @@ export class AppComponent implements OnInit {
     return new Page(arr.length, arr.slice(startIndex, startIndex + this.itemsPerPage))
   }
 
-  loadPage(pageNumber: number) {
-    
-    console.log("page"+pageNumber);
-    
+  loadPage(pageNumber: number) {    
+    this.pageNumber = pageNumber
     let page: Page
 
     if(this.filteredEmojis.length !== 0){
@@ -136,24 +135,26 @@ export class AppComponent implements OnInit {
         this.favemojis.push(emoji)
       }
     }
+    this.loadPage(this.pageNumber)
   }
 
-  del(emoji: emoji) {
-    if (emoji.isDeleted) {
+  del(emoji: emoji) {    
+    if (emoji.isDeleted) {    
       let index = this.delemojis.indexOf(emoji)
-      if(index !== -1){
+      if(index !== -1){        
         emoji.isDeleted = false
         this.delemojis.splice(index, 1)
         this.allemojis.push(emoji)
       }
-    } else {
+    } else {      
       let index = this.allemojis.indexOf(emoji)
-      if (index !== -1) {
+      if (index !== -1) {        
         emoji.isDeleted = true
         this.allemojis.splice(index, 1)
         this.delemojis.push(emoji)
       }
-    }
+    }    
+    this.loadPage(this.pageNumber)
   }
   title = 'angular-gitEmojis'
 
