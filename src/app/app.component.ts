@@ -95,6 +95,15 @@ export class AppComponent implements OnInit {
 
     if(this.filteredEmojis.length !== 0){
       page = this.sliceArr(this.filteredEmojis, pageNumber)
+      let intersection: emoji[] = []
+      if (this.currentCategory === 0) {       //загрузить все      
+        intersection = this.filteredEmojis.filter(x => this.allemojis.includes(x));       
+      }else if (this.currentCategory === 1) {//загрузить любимые      
+        intersection = this.filteredEmojis.filter(x => this.favemojis.includes(x));
+      } else if (this.currentCategory === 2) {//загрузить удаленные      
+        intersection = this.filteredEmojis.filter(x => this.delemojis.includes(x));
+      }
+      page = this.sliceArr(intersection, pageNumber)
     }else {
       if (this.currentCategory === 0) {       //загрузить все      
         page = this.sliceArr(this.allemojis, pageNumber)
