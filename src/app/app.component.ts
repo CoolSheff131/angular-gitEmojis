@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
   }
 
   saveLists() {
+    
     localStorage.setItem("deleted", JSON.stringify(this.delemojis))
     localStorage.setItem("favorite", JSON.stringify(this.favemojis))
   }
@@ -77,13 +78,24 @@ export class AppComponent implements OnInit {
       this.loading = false
     })
     this.loading = true
-    localStorage.clear()
+    
   }
 
   checkEmojis() {
-    this.allemojis.forEach(emoji => {
-      emoji.isDeleted = this.delemojis.includes(emoji)
-      emoji.isFavorite = this.favemojis.includes(emoji)
+    this.allemojis.forEach((emoji,indexAll,arrAll) => {
+      this.favemojis.forEach((favemoji, index, arr) => {
+        if(emoji.name === favemoji.name){
+          emoji.isFavorite = true
+          arr[index] = emoji
+        }
+      })
+      this.delemojis.forEach((delemoji, index, arr) => {
+        if(delemoji.name === emoji.name){
+          arrAll.splice(indexAll,1)
+          emoji.isDeleted = true
+          arr[index] = emoji
+        }      
+      })          
     })
   }
 
@@ -105,7 +117,7 @@ export class AppComponent implements OnInit {
   }
 
   sliceArr(arr: emoji[], page: number): Page {
-    var startIndex = this.itemsPerPage * (page - 1)
+    let startIndex = this.itemsPerPage * (page - 1)
     return new Page(arr.length, arr.slice(startIndex, startIndex + this.itemsPerPage))
   }
 
@@ -175,7 +187,8 @@ export class AppComponent implements OnInit {
         if (index !== -1) {
           emoji.isDeleted = true          
           this.allemojis.splice(index, 1)
-          this.delemojis.push(emoji)
+          if(!this.delemojis.includes(emoji))
+            this.delemojis.push(emoji)
 
           index = this.favemojis.indexOf(emoji)
       if (index !== -1) {
