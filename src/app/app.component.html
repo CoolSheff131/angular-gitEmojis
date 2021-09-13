@@ -6,6 +6,6 @@
   <div class="col-9">
     <app-emoji-table [header]="headerTable" [itemsPerPage]="itemsPerPage" [collectionSize]="collectionSize"
       [emojis]="emojis" [loading]="loading" (newItemEvent)="loadPage($event)" (favItemEvent)="fav($event)"
-      (delItemEvent)="del($event)" (searchItemEvent)="searchItem($event)"></app-emoji-table>
+      (delItemEvent)="del($event)" (searchItemEvent)="searchItem($event)" [isFail]="isFail"></app-emoji-table>
   </div>
 </div>

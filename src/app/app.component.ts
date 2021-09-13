@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     { name: "удаленные", active: false }
   ]
   headerTable: string = ""
-
+  isFail: boolean = false
   currentCategory: number = 0
   emojis: emoji[] = []
   allemojis: emoji[] = []
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   pageNumber: number = 1
   searchName: string = ""
   @ViewChild(EmojiTableComponent) emojiTable!: EmojiTableComponent
-  public collectionSize: number
+  public collectionSize: number = 1
 
   loadLists() {
     let jsonArr = localStorage.getItem("deleted")
@@ -51,9 +51,7 @@ export class AppComponent implements OnInit {
     localStorage.setItem("favorite", JSON.stringify(this.favemojis))
   }
 
-  constructor(private configService: ConfigService) {
-    this.collectionSize = 1
-  }
+  constructor(private configService: ConfigService) { }
 
   searchItem(searchName: string) {
     this.searchName = searchName
@@ -76,7 +74,11 @@ export class AppComponent implements OnInit {
       this.showCategory(0)
       this.loadLists()
       this.loading = false
+    }, (e) => {
+      this.isFail = true
     })
+
+
     this.loading = true
 
   }

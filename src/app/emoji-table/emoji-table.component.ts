@@ -18,6 +18,7 @@ export class EmojiTableComponent {
   @Output() searchItemEvent = new EventEmitter<string>();
   @Input() emojis: emoji[] = []
   @Input() header: string = ""
+  @Input() isFail: boolean = false
 
   constructor() { }
 

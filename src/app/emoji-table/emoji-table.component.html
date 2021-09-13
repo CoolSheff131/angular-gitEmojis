@@ -33,8 +33,12 @@
         </div>
     </div>
 
-    <div *ngIf="loading" class="spinner-border text-primary m-auto" role="status">
+    <div *ngIf="loading && !isFail" class="spinner-border text-primary m-auto" role="status">
         <span class="sr-only">Loading...</span>
+    </div>
+
+    <div *ngIf="isFail" class="alert alert-danger text-center">
+        <h4>Нет подключениия к интернету</h4>
     </div>
 
     <div class="overflow-auto">
