@@ -6,3 +6,6 @@
 :not(.active) .nav-link:hover{
     background-color: rgb(83, 83, 83);
 }
+.nav-item{
+    cursor: pointer;
+}

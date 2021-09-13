@@ -28,3 +28,7 @@
 .row{
     height: 50px;
 }
+
+.btnIcon{
+    cursor: pointer;
+}

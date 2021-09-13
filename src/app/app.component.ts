@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   itemsPerPage: number = 7
   loading: boolean = true
   pageNumber: number = 1
+  searchName: string = ""
   @ViewChild(EmojiTableComponent) emojiTable!: EmojiTableComponent
   public collectionSize: number
 
@@ -54,7 +55,14 @@ export class AppComponent implements OnInit {
   }
 
   searchItem(searchName: string) {
-    this.filteredEmojis = this.allemojis.filter(emoji => emoji.name.indexOf(searchName) !== -1)
+    this.searchName = searchName
+    if (this.currentCategory === 0) {       //загрузить все      
+      this.filteredEmojis = this.allemojis.filter(emoji => emoji.name.indexOf(searchName) !== -1)
+    } else if (this.currentCategory === 1) {//загрузить любимые      
+      this.filteredEmojis = this.favemojis.filter(emoji => emoji.name.indexOf(searchName) !== -1)
+    } else if (this.currentCategory === 2) {//загрузить удаленные      
+      this.filteredEmojis = this.delemojis.filter(emoji => emoji.name.indexOf(searchName) !== -1)
+    }    
     let page = this.sliceArr(this.filteredEmojis, 1)
     this.emojis = page!.rows
     this.collectionSize = page!.totalCount
@@ -80,10 +88,19 @@ export class AppComponent implements OnInit {
   }
 
   showCategory(index: number) {
+    console.log("emojisFiltered"+this.filteredEmojis.length);
+     
     this.categories[this.currentCategory].active = false
     this.currentCategory = index
     this.categories[index].active = true
     this.headerTable = this.categories[index].name
+    
+    if(this.searchName.length !== 0) {
+      this.searchItem(this.searchName)
+      console.log("entered");      
+    }else{
+      this.filteredEmojis = []
+    }
     this.loadPage(1)
   }
 

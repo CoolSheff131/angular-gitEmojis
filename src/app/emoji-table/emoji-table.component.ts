@@ -19,14 +19,14 @@ export class EmojiTableComponent implements OnInit {
   @Output() delItemEvent = new EventEmitter<emoji>();
   @Output() favItemEvent = new EventEmitter<emoji>();
   @Output() searchItemEvent = new EventEmitter<string>();
-  @Input() emojis :emoji[] = []
+  @Input() emojis: emoji[] = []
   @Input() header: string = ""
-  constructor() { 
-    this.pageNumber= 1
-    this.collectionSize=1
+  constructor() {
+    this.pageNumber = 1
+    this.collectionSize = 1
   }
 
-  search(searchName: string){
+  search(searchName: string) {
     console.log(searchName);
     this.searchItemEvent.emit(searchName)
   }
@@ -34,27 +34,21 @@ export class EmojiTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  private loadPage(){
-    console.log("pageintables"+this.pageNumber);
-    this.newItemEvent.emit(this.pageNumber)   
+  private loadPage() {
+    this.newItemEvent.emit(this.pageNumber)
   }
 
-  onPageChanged(pageNumber: number){
+  onPageChanged(pageNumber: number) {
     this.pageNumber = pageNumber
     this.loadPage()
   }
 
-  showEmojis(i: number){
-    console.log(this.emojis);   
+  makeFavorite(emoji: emoji) {
+    this.favItemEvent.emit(emoji)
   }
 
-  
-  makeFavorite(emoji: emoji){
-    this.favItemEvent.emit(emoji)   
-  }
-
-  delete(index: emoji){
-    this.delItemEvent.emit(index)   
+  delete(index: emoji) {
+    this.delItemEvent.emit(index)
   }
 
 
