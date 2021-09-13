@@ -145,12 +145,18 @@ export class AppComponent implements OnInit {
         emoji.isFavorite = true
         this.favemojis.push(emoji)
       }
+    }else{
+      let index = this.favemojis.indexOf(emoji)
+      if (index !== -1) {
+        emoji.isFavorite = false
+        this.favemojis.splice(index, 1)
+      }
     }
     this.loadPage(this.pageNumber)
   }
 
   del(emoji: emoji) {
-    if (emoji.isFavorite) {
+    if (this.currentCategory == 1) {//если пользователь в списке любимых
       let index = this.favemojis.indexOf(emoji)
       if (index !== -1) {
         emoji.isFavorite = false
@@ -167,9 +173,15 @@ export class AppComponent implements OnInit {
       } else {
         let index = this.allemojis.indexOf(emoji)
         if (index !== -1) {
-          emoji.isDeleted = true
+          emoji.isDeleted = true          
           this.allemojis.splice(index, 1)
           this.delemojis.push(emoji)
+
+          index = this.favemojis.indexOf(emoji)
+      if (index !== -1) {
+        emoji.isFavorite = false
+        this.favemojis.splice(index, 1)
+      }
         }
       }
     }
