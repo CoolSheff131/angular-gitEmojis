@@ -12,6 +12,7 @@ import { emoji } from '../config/interfaces';
 export class EmojiTableComponent implements OnInit {
   asdf = true
   public page: number
+  @Input() loading: boolean = false
   @Input() collectionSize: number
   @Input() itemsPerPage: number = 7;
   @Output() newItemEvent = new EventEmitter<number>();

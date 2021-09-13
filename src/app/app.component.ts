@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   favemojis: emoji[] = []
   delemojis: emoji[] = []
   itemsPerPage: number = 7
+  loading: boolean = true
   @ViewChild(EmojiTableComponent) emojiTable!: EmojiTableComponent
   public collectionSize: number
 
@@ -51,11 +52,14 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.configService.getConfig().subscribe((arr) => {
       this.allemojis = arr
       this.showCategory(0)
       this.loadLists()
+      this.loading = false
     })
+    this.loading = true
     localStorage.clear()
   }
 
