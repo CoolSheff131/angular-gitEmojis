@@ -11,7 +11,7 @@ import { emoji } from '../config/interfaces';
 })
 export class EmojiTableComponent implements OnInit {
   asdf = true
-  public page: number
+  public pageNumber: number
   @Input() loading: boolean = false
   @Input() collectionSize: number
   @Input() itemsPerPage: number = 7;
@@ -22,7 +22,7 @@ export class EmojiTableComponent implements OnInit {
   @Input() emojis :emoji[] = []
   @Input() header: string = ""
   constructor() { 
-    this.page= 1
+    this.pageNumber= 1
     this.collectionSize=1
   }
 
@@ -32,14 +32,15 @@ export class EmojiTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadPage()
   }
 
   private loadPage(){
-    this.newItemEvent.emit(this.page)   
+    console.log("pageintables"+this.pageNumber);
+    this.newItemEvent.emit(this.pageNumber)   
   }
 
   onPageChanged(pageNumber: number){
+    this.pageNumber = pageNumber
     this.loadPage()
   }
 

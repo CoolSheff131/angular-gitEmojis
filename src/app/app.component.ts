@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
     { name: "удаленные", active: false }
   ]
   headerTable: string = ""
+  
   currentCategory: number = 0
   emojis: emoji[] = []
   allemojis: emoji[] = []
@@ -91,6 +92,9 @@ export class AppComponent implements OnInit {
   }
 
   loadPage(pageNumber: number) {
+    
+    console.log("page"+pageNumber);
+    
     let page: Page
 
     if(this.filteredEmojis.length !== 0){
